@@ -262,15 +262,6 @@ module.exports = function (grunt) {
                 options: {
                     process: function (content, srcpath) {
                         if (srcpath.indexOf("index.html") >= 0) {
-                            // Add Google Analytics code to index.html
-                            content = content.replace("</body></html>",
-                                grunt.file.read("src/web/static/ga.html") + "</body></html>");
-
-                            // Add Structured Data for SEO
-                            content = content.replace("</head>",
-                                "<script type='application/ld+json'>" +
-                                JSON.stringify(JSON.parse(grunt.file.read("src/web/static/structuredData.json"))) +
-                                "</script></head>");
                             return grunt.template.process(content, srcpath);
                         } else {
                             return content;
