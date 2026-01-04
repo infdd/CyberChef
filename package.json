@@ -98,6 +98,7 @@
   "dependencies": {
     "@astronautlabs/amf": "^0.0.6",
     "@babel/polyfill": "^7.12.1",
+    "@bitcoinerlab/secp256k1": "^1.1.1",
     "@blu3r4y/lzma": "^2.3.3",
     "@wavesenterprise/crypto-gost-js": "^2.1.0-RC1",
     "@xmldom/xmldom": "^0.8.10",
@@ -106,6 +107,7 @@
     "avsc": "^5.7.7",
     "bcryptjs": "^2.4.3",
     "bignumber.js": "^9.1.2",
+    "bip32": "^5.0.0-rc.0",
     "blakejs": "^1.2.1",
     "bootstrap": "4.6.2",
     "bootstrap-colorpicker": "^3.4.0",
