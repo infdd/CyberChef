@@ -404,6 +404,7 @@
             "Seedphrase To Seed",
             "Change Extended Key Version",
             "Seed To Master Key",
+            "Seed To ETH Private Key",
             "Decrypt Keystore File",
             "BIP32Derive",
             "Public Key To ETH Style Address",
