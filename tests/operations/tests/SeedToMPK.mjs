@@ -102,20 +102,20 @@ TestRegister.addTests([
         ]
     },
     {
-        name: "Seed To Master Private Key (ethpriv)",
+        name: "Seed To Master Private Key (ethprv, m/44'/60'/0'/0)",
         input: "c766f48d3729a16249b5d0171c678d458d31454b2bb7791b61169b5541a130719714ebd41f22a2515246d013e9a4e978aee48dd5140b73a540108d58008c4aa9",
-        expectedOutput: "df9ea7d92902144e3c4240b703a66a29d34c45b9ed90568c0fa82ace63eef8f6",
+        expectedOutput: "0c629eb44dd13e0e6d78d13b90b4995ffc17bd6cb51268e1f433d3bee2101f46",
         recipeConfig: [
             {
                 "op": "Seed To Master Key",
-                "args": ["ethpriv"]
+                "args": ["ethprv"]
             }
         ],
     },
     {
-        name: "Seed To Master Public Key (ethpub)",
+        name: "Seed To Master Public Key (ethpub, m/44'/60'/0'/0)",
         input: "c766f48d3729a16249b5d0171c678d458d31454b2bb7791b61169b5541a130719714ebd41f22a2515246d013e9a4e978aee48dd5140b73a540108d58008c4aa9",
-        expectedOutput: "024d339abb6cddb53e6a6175aae8041bc2009de563af27e67131c2035bf45d7d4c",
+        expectedOutput: "030be21be43c31184eba31a81cc98fb0a4947f54e570638fc185ca4a1c8e4143ad",
         recipeConfig: [
             {
                 "op": "Seed To Master Key",
@@ -124,24 +124,43 @@ TestRegister.addTests([
         ],
     },
     {
-        name: "Seed To Master Private Key (ethpriv, short seed)",
+        name: "Seed To Master Private Key (ethprv, m/44'/60'/0'/0, short seed)",
         input: "1ed5b6f0dcf88085add90fbb138d5e16f661d5b738f842232fce5980fc4592",
-        expectedOutput: "5e7b4b17968cfcde8e2630d7897c260d02c8668b583a7c9fa2fea837afd301f9",
+        expectedOutput: "f6e4f67d90fb6d9afc8bef3c98fdc9c92a42259445689fe78c7bdce7e8ec28e5",
         recipeConfig: [
             {
                 "op": "Seed To Master Key",
-                "args": ["ethpriv"]
+                "args": ["ethprv"]
             }
         ],
     },
     {
-        name: "Seed To Master Public Key (ethpub, short seed)",
+        name: "Seed To Master Public Key (ethpub, m/44'/60'/0'/0, short seed)",
         input: "1ed5b6f0dcf88085add90fbb138d5e16f661d5b738f842232fce5980fc4592",
-        expectedOutput: "0213885bc9f5134a895150a6a978430543c4e2eeb9599cc3c99d6e5e946ec84d32",
+        expectedOutput: "020effd7a730a273e623a45911f2d02e86145c502733bbca99de72b4b6853173e7",
         recipeConfig: [
             {
                 "op": "Seed To Master Key",
                 "args": ["ethpub"]
+            }
+        ],
+    },
+    {
+        // Well-known test mnemonic used by Hardhat/Foundry. Deriving one step
+        // further to m/44'/60'/0'/0/0 yields the known account 0 private key
+        // ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80,
+        // which anchors this expected value.
+        name: "Seedphrase To Seed To Master Private Key (ethprv, m/44'/60'/0'/0)",
+        input: "test test test test test test test test test test test junk",
+        expectedOutput: "dd23ca549a97cb330b011aebb674730df8b14acaee42d211ab45692699ab8ba5",
+        recipeConfig: [
+            {
+                "op": "Seedphrase To Seed",
+                "args": ["bip39", {"option": "UTF8", "string": ""}]
+            },
+            {
+                "op": "Seed To Master Key",
+                "args": ["ethprv"]
             }
         ],
     }
