@@ -379,6 +379,7 @@
             "From WIF Format",
             "Type Cryptocurrency Artifact",
             "Private EC Key to Public Key",
+            "Entropy To Seedphrase",
             "Seedphrase To Seed",
             "Change Extended Key Version",
             "Seed To Master Key",

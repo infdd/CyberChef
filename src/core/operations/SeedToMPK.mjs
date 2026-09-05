@@ -9,6 +9,7 @@
 import Operation from "../Operation.mjs";
 import { serializeExtendedKeyFunc, getExtendedKeyVersion, getVersions, isHex } from "../lib/Bitcoin.mjs";
 import forge from "node-forge";
+import ec from "elliptic";
 import Utils from "../Utils.mjs";
 
 
@@ -25,7 +26,7 @@ class SeedToMPK extends Operation {
 
         this.name = "Seed To Master Key";
         this.module = "Serialize";
-        this.description = "Given a 64 byte seed, we change the seed into the extended given master private key, with selected version. To produce the seed from a seedphrase, you can use the Seedphrase To Seed Op.";
+        this.description = "Given a 64 byte seed, we change the seed into the extended given master private key, with selected version. The ethpriv and ethpub versions output the raw master private key and its associated compressed secp256k1 public key respectively, as hex, for Ethereum style use. To produce the seed from a seedphrase, you can use the Seedphrase To Seed Op.";
         this.infoURL = "https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#Serialization_format";
         this.inputType = "string";
         this.outputType = "string";
@@ -33,7 +34,7 @@ class SeedToMPK extends Operation {
             {
                 "name": "Version Type",
                 "type": "option",
-                "value": getVersions()
+                "value": getVersions().concat(["ethpriv", "ethpub"])
             }
         ];
     }
@@ -60,6 +61,15 @@ class SeedToMPK extends Operation {
             hmac.update(input);
         }
         const hexValue = hmac.digest().toHex();
+
+        if (args[0] === "ethpriv") {
+            return hexValue.slice(0, 64);
+        }
+        if (args[0] === "ethpub") {
+            const ecContext = ec.ec("secp256k1");
+            const key = ecContext.keyFromPrivate(hexValue.slice(0, 64));
+            return key.getPublic(true, "hex");
+        }
 
         const newVersion = getExtendedKeyVersion(args[0]);
 

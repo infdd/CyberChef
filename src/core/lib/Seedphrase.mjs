@@ -81,6 +81,31 @@ function deriveChecksumBits (entropyBuffer) {
 }
 
 /**
+ * Turns entropy bytes into a BIP39 mnemonic string.
+ * @param {bytes} entropyBuffer
+ * @param {list} wordlist
+ * @returns
+ */
+export function entropyToMnemonic (entropyBuffer, wordlist) {
+    if (entropyBuffer.length < 16) throw new Error(INVALIDENTROPY);
+    if (entropyBuffer.length > 32) throw new Error(INVALIDENTROPY);
+    if (entropyBuffer.length % 4 !== 0) throw new Error(INVALIDENTROPY);
+
+    const entropyBits = bytesToBinary([...entropyBuffer]);
+    const checksumBits = deriveChecksumBits(entropyBuffer);
+    const bits = entropyBits + checksumBits;
+
+    // split the binary string into groups of 11 bits, each mapping to a word
+    const chunks = bits.match(/(.{1,11})/g);
+    const mnemonic = chunks.map(function (bin) {
+        const index = parseInt(bin, 2);
+        return wordlist[index];
+    });
+
+    return mnemonic.join(" ");
+}
+
+/**
  * Turns a mnemonic string to the underlying bytes.
  * @param {str} mnemonic
  * @param {list} wordlist

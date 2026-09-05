@@ -202,6 +202,7 @@ import "./tests/PublicKeyToP2PKHAddress.mjs";
 import "./tests/PrivateECKeyToPublic.mjs";
 import "./tests/PrivateKeyToWIF.mjs";
 import "./tests/ChangeExtendedKeyVersion.mjs";
+import "./tests/EntropyToSeedphrase.mjs";
 import "./tests/SeedToMPK.mjs";
 import "./tests/DecryptKeyStoreFile.mjs";
 import "./tests/WIFToPrivateKey.mjs";

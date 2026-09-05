@@ -100,6 +100,50 @@ TestRegister.addTests([
             }
 
         ]
+    },
+    {
+        name: "Seed To Master Private Key (ethpriv)",
+        input: "c766f48d3729a16249b5d0171c678d458d31454b2bb7791b61169b5541a130719714ebd41f22a2515246d013e9a4e978aee48dd5140b73a540108d58008c4aa9",
+        expectedOutput: "df9ea7d92902144e3c4240b703a66a29d34c45b9ed90568c0fa82ace63eef8f6",
+        recipeConfig: [
+            {
+                "op": "Seed To Master Key",
+                "args": ["ethpriv"]
+            }
+        ],
+    },
+    {
+        name: "Seed To Master Public Key (ethpub)",
+        input: "c766f48d3729a16249b5d0171c678d458d31454b2bb7791b61169b5541a130719714ebd41f22a2515246d013e9a4e978aee48dd5140b73a540108d58008c4aa9",
+        expectedOutput: "024d339abb6cddb53e6a6175aae8041bc2009de563af27e67131c2035bf45d7d4c",
+        recipeConfig: [
+            {
+                "op": "Seed To Master Key",
+                "args": ["ethpub"]
+            }
+        ],
+    },
+    {
+        name: "Seed To Master Private Key (ethpriv, short seed)",
+        input: "1ed5b6f0dcf88085add90fbb138d5e16f661d5b738f842232fce5980fc4592",
+        expectedOutput: "5e7b4b17968cfcde8e2630d7897c260d02c8668b583a7c9fa2fea837afd301f9",
+        recipeConfig: [
+            {
+                "op": "Seed To Master Key",
+                "args": ["ethpriv"]
+            }
+        ],
+    },
+    {
+        name: "Seed To Master Public Key (ethpub, short seed)",
+        input: "1ed5b6f0dcf88085add90fbb138d5e16f661d5b738f842232fce5980fc4592",
+        expectedOutput: "0213885bc9f5134a895150a6a978430543c4e2eeb9599cc3c99d6e5e946ec84d32",
+        recipeConfig: [
+            {
+                "op": "Seed To Master Key",
+                "args": ["ethpub"]
+            }
+        ],
     }
 
 ]);
